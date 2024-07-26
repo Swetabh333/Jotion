@@ -45,13 +45,30 @@ export const Navigation = ()=>{
         })
     }
 
+    const resetWidth = () =>{
+        if(sideRef.current && navbarRef.current){
+            setIsCollapsed(false);
+            setIsResetting(true);
+
+            sideRef.current.style.width = isMobile?"100%" : "240px";
+            navbarRef.current.style.setProperty(
+                "width",
+                isMobile?"0":"calc(100%-240px)"
+            );
+            navbarRef.current.style.setProperty("left",isMobile?"100%":"240px");
+            setTimeout(()=>{
+                setIsResetting(false)
+            },300) // because of the 300 ms transition timing
+        }
+    }
+
     useEffect(()=>{
         if(isMobile){
             collapse();
         }else{
             resetWidth();
         }
-    },[isMobile]);
+    },[isMobile,resetWidth]);
 
     useEffect(()=>{
         if(isMobile){
@@ -87,22 +104,7 @@ export const Navigation = ()=>{
         document.removeEventListener("mousemove",handleMouseMove);
     }
 
-    const resetWidth = () =>{
-        if(sideRef.current && navbarRef.current){
-            setIsCollapsed(false);
-            setIsResetting(true);
-
-            sideRef.current.style.width = isMobile?"100%" : "240px";
-            navbarRef.current.style.setProperty(
-                "width",
-                isMobile?"0":"calc(100%-240px)"
-            );
-            navbarRef.current.style.setProperty("left",isMobile?"100%":"240px");
-            setTimeout(()=>{
-                setIsResetting(false)
-            },300) // because of the 300 ms transition timing
-        }
-    }
+    
 
     const collapse = ()=>{
         if(sideRef.current && navbarRef.current){
