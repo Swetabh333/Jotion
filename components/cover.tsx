@@ -57,7 +57,7 @@ export const Cover =({
     )
 }
 
-Cover.Skeleton = function COverSkeleton(){
+Cover.Skeleton = function CoverSkeleton(){
     return(
         <Skeleton  className="w-full h-[12vh]"/>
     )
